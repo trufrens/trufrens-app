@@ -1,0 +1,27 @@
+{
+  "name": "trufrens",
+  "version": "1.0.0",
+  "description": "Realtime chat app with rooms",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "lint": "eslint --fix --ext .js --ignore-path .gitignore ."
+  },
+  "author": "andrelucaas",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "denky-database": "^1.0.6",
+    "ejs": "^3.1.8",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "socket.io": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.3",
+    "eslint-plugin-promise": "^6.0.0"
+  }
+}
