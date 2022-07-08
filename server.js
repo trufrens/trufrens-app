@@ -43,10 +43,8 @@ app.post('/api/createroom', async (req, res) => {
   if (!global.db.get('rooms')) {
     global.db.set('rooms', [])
   }
-  global.db.push('rooms', {
-    name: roomName,
-    owner: username
-  })
+  global.db.push('rooms', roomName)
+  global.db.set(`${roomName}.owner`, username)
   res.redirect(`/chat?username=${username}&room=${roomName}`)
 })
 
@@ -56,13 +54,13 @@ app.post('/api/deleteroom', async (req, res) => {
     global.db.set('rooms', [])
   }
   global.db.pull('rooms', roomName)
+  global.db.delete(`messages.${roomName}`)
   res.redirect('/')
 })
 
 app.get('/chat', async (req, res) => {
   const messages = await global.db.get(`messages.${req.query.room}`) || []
-  const rooms = global.db.get('rooms') || []
-  const onwer = rooms.find(room => room.name === req.query.room).owner
+  const onwer = global.db.get(`${req.query.room}.owner`)
   res.render('chat', {
     msgs: messages,
     owner: onwer,
